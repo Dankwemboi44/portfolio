@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { profile, projects } from "../data/portfolio";
 import ProjectCard from "../components/ProjectCard";
+import Typewriter from "../components/Typewriter";
+import FadeIn from "../components/FadeIn";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
@@ -8,17 +11,35 @@ export default function Home() {
       {/* HERO */}
       <section className="max-w-6xl mx-auto px-4 pt-16 pb-24 md:pt-24 md:pb-32">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          
+          {/* Hero Text - Slides in from left */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <p className="text-primary font-semibold tracking-widest text-sm uppercase mb-4">
               {profile.location}
             </p>
             <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
-              Hey, I'm{" "}
-              <span className="text-primary">Dan</span>.
+              Hey, I'm <span className="text-primary">Dan</span>.
               <br />
-              {profile.tagline}
+              {/* Dynamic Typewriter Role */}
+              <span className="text-3xl md:text-5xl block mt-4 text-base-content/90">
+                I'm a{" "}
+                <Typewriter
+                  words={[
+                    "Computer Science Student.",
+                    "IT Support.",
+                    "Systems Developer.",
+                    "Machine Learning Enthusiast.",
+                    "Artificial Intelligence.",
+                    "Data Scientist in the making.",
+                  ]}
+                />
+              </span>
             </h1>
-            <p className="text-lg text-base-content/70 mb-8 max-w-lg">
+            <p className="text-lg text-base-content/70 mb-8 max-w-lg mt-6">
               {profile.bio.split(".")[0]}.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -29,9 +50,15 @@ export default function Home() {
                 Get in touch
               </Link>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center md:justify-end">
+          {/* Hero Image - Scales up and fades in */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="flex justify-center md:justify-end"
+          >
             <div className="relative">
               <div className="absolute inset-0 bg-primary rounded-full blur-3xl opacity-20"></div>
               <img
@@ -44,32 +71,37 @@ export default function Home() {
                 }}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FEATURED PROJECTS */}
       <section className="max-w-6xl mx-auto px-4 pb-24">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-primary font-semibold tracking-widest text-sm uppercase mb-2">
-              Selected Work
-            </p>
-            <h2 className="text-3xl md:text-4xl font-black tracking-tight">
-              Things I've built
-            </h2>
+        <FadeIn>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-primary font-semibold tracking-widest text-sm uppercase mb-2">
+                Selected Work
+              </p>
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight">
+                Things I've built
+              </h2>
+            </div>
+            <Link
+              to="/projects"
+              className="link link-primary text-sm font-semibold hidden sm:inline"
+            >
+              View all →
+            </Link>
           </div>
-          <Link
-            to="/projects"
-            className="link link-primary text-sm font-semibold hidden sm:inline"
-          >
-            View all →
-          </Link>
-        </div>
+        </FadeIn>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} />
+          {projects.map((p, i) => (
+            /* Stagger the project cards so they fade in one after another */
+            <FadeIn key={p.id} delay={i * 0.15}>
+              <ProjectCard project={p} />
+            </FadeIn>
           ))}
         </div>
       </section>

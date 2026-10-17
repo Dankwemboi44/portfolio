@@ -7,17 +7,25 @@ export default function ProjectCard({ project }: { project: Project }) {
       to={`/projects/${project.id}`}
       className="group card bg-base-200 border border-base-300 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
     >
-      {/* Screenshot preview */}
-      <figure className="aspect-video overflow-hidden bg-base-300">
+      {/* Screenshot preview with Hover Overlay */}
+      <figure className="relative aspect-video overflow-hidden bg-base-300">
         {project.screenshots[0] ? (
-          <img
-            src={project.screenshots[0]}
-            alt={project.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
+          <>
+            <img
+              src={project.screenshots[0]}
+              alt={project.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              onError={(e) => {
+                (e.target as HTMLImageElement).style.display = "none";
+              }}
+            />
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+              <span className="text-white font-bold tracking-wide flex items-center gap-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                View Project →
+              </span>
+            </div>
+          </>
         ) : (
           <div className="w-full h-full flex items-center justify-center text-base-content/20 text-4xl font-black">
             {project.title.charAt(0)}
