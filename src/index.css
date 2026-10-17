@@ -1,8 +1,11 @@
 @import "tailwindcss";
+
+/* @ts-ignore */
 @plugin "daisyui" {
   themes: dark --default;
 }
 
+/* @ts-ignore */
 @plugin "daisyui/theme" {
   name: "dark";
   default: true;
@@ -28,4 +31,6 @@
   --radius-box: 1.25rem;
 }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth; 
+}

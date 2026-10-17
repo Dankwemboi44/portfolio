@@ -1,4 +1,4 @@
-import { profile, skills } from "../data/portfolio";
+import { skills } from "../data/portfolio";
 import { FaPython, FaReact, FaNodeJs, FaHtml5, FaJs, FaBrain, FaShieldAlt } from "react-icons/fa";
 import FadeIn from "../components/FadeIn";
 
