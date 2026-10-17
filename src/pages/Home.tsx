@@ -21,27 +21,33 @@ export default function Home() {
             <p className="text-primary font-semibold tracking-widest text-sm uppercase mb-4">
               {profile.location}
             </p>
+            
             <h1 className="text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6">
               Hey, I'm <span className="text-primary">Dan</span>.
+            </h1>
+
+            {/* Understandable dynamic intro */}
+            <div className="text-2xl md:text-3xl font-bold mb-6 text-base-content/90 leading-tight">
+              I'm a <span className="text-base-content">Computer Science Student</span>.
               <br />
-              {/* Dynamic Typewriter Role */}
-              <span className="text-3xl md:text-5xl block mt-4 text-base-content/90">
-                I'm a{" "}
+              <span className="text-primary/90 text-xl md:text-2xl mt-2 block font-semibold">
+                {" "}
                 <Typewriter
                   words={[
-                    "Computer Science Student.",
-                    "IT Support.",
-                    "Systems Developer.",
-                    "Machine Learning Enthusiast.",
+                    "Software Development.",
+                    "Systems Development.",
+                    "Machine Learning.",
+                    "Data Science.",
                     "Artificial Intelligence.",
-                    "Data Scientist in the making.",
                   ]}
                 />
               </span>
-            </h1>
-            <p className="text-lg text-base-content/70 mb-8 max-w-lg mt-6">
+            </div>
+
+            <p className="text-lg text-base-content/70 mb-8 max-w-lg">
               {profile.bio.split(".")[0]}.
             </p>
+            
             <div className="flex flex-wrap gap-3">
               <Link to="/projects" className="btn btn-primary btn-lg rounded-full">
                 See my work →
